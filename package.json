@@ -1,0 +1,10 @@
+{
+  "name": "notbot-app",
+  "version": "1.0.0",
+  "description": "NOTBOT - reclaim locked SOL rent from empty Solana token accounts",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "license": "MIT"
+}
