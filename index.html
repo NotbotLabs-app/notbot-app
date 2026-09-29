@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOTBOT – Get your locked Solana rent back</title>
+  <meta name="description" content="NOTBOT finds empty token accounts in your Solana wallet, closes them, and returns the locked SOL rent to you. Non-custodial. 85% to you, 15% service fee.">
+  <meta name="theme-color" content="#0B1F16">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="NOTBOT home">
+    <img src="logo.png" alt="" width="44" height="44">
+    <span>notbot</span>
+  </a>
+  <nav aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#fees">Fees</a>
+    <a href="#safety">Safety</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Your closed token accounts are still holding your SOL.</h1>
+      <p class="lead">Every token you ever traded left a small account on Solana with about 0.002 SOL locked inside. NOTBOT finds the empty ones, closes them, and sends the SOL back to your wallet.</p>
+      <ul class="hero-points">
+        <li>You see the exact amounts before you sign</li>
+        <li>Non-custodial: your keys never leave your wallet</li>
+        <li>85% comes back to you, 15% is the service fee</li>
+      </ul>
+    </div>
+
+    <div class="tool" id="tool">
+      <img class="tool-mascot" src="logo.png" alt="NOTBOT mascot holding a green check mark" width="120" height="113">
+
+      <h2>Check your wallet</h2>
+
+      <div id="walletButtons" class="wallet-buttons" role="group" aria-label="Connect a wallet">
+        <button type="button" class="btn btn-wallet" data-wallet="phantom">Phantom</button>
+        <button type="button" class="btn btn-wallet" data-wallet="solflare">Solflare</button>
+        <button type="button" class="btn btn-wallet" data-wallet="backpack">Backpack</button>
+      </div>
+
+      <p id="connected" class="connected" hidden>
+        Connected: <strong id="connectedAddr"></strong>
+        <button type="button" id="disconnectBtn" class="link-btn">Disconnect</button>
+      </p>
+
+      <div class="or"><span>or preview any address</span></div>
+
+      <div class="scan-row">
+        <label class="sr-only" for="addressInput">Solana wallet address</label>
+        <input id="addressInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste a Solana wallet address">
+        <button type="button" id="scanBtn" class="btn btn-primary">Scan</button>
+      </div>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <div id="results" hidden>
+        <table class="breakdown">
+          <caption class="sr-only">Reclaim breakdown</caption>
+          <tbody>
+            <tr><th scope="row">Empty accounts found</th><td id="resCount">0</td></tr>
+            <tr><th scope="row">Total SOL locked</th><td id="resTotal">0</td></tr>
+            <tr class="fee"><th scope="row">NOTBOT fee (15%)</th><td id="resFee">0</td></tr>
+            <tr class="net"><th scope="row">You receive (85%)</th><td id="resNet">0</td></tr>
+          </tbody>
+        </table>
+
+        <details class="accounts">
+          <summary>Show accounts that will be closed</summary>
+          <ul id="accountList"></ul>
+        </details>
+
+        <button type="button" id="closeBtn" class="btn btn-primary btn-wide" disabled>Reclaim SOL</button>
+        <p id="closeHint" class="hint"></p>
+      </div>
+
+      <div id="txLinks" class="tx-links" hidden></div>
+    </div>
+  </section>
+
+  <section id="how" class="section">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>
+        <h3>Connect or paste</h3>
+        <p>Connect Phantom, Solflare or Backpack. You can also paste any address to see what is locked there, but only the owner can close accounts.</p>
+      </li>
+      <li>
+        <h3>We scan for empty accounts</h3>
+        <p>NOTBOT reads your token accounts through Helius and keeps only those with a zero balance. Accounts that hold tokens are never touched.</p>
+      </li>
+      <li>
+        <h3>Review and sign</h3>
+        <p>You see the total, the fee and what you receive. Your wallet then asks you to approve the transaction. Nothing happens without your signature.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="fees" class="section">
+    <h2>Fees, in full</h2>
+    <p class="section-lead">Each token account keeps a rent deposit of about 0.00203928 SOL. Closing the account releases it. This is what happens to one account:</p>
+    <table class="fee-table">
+      <thead>
+        <tr><th scope="col">Where it goes</th><th scope="col">Share</th><th scope="col">SOL per account</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Released by the network</th><td>100%</td><td>0.00203928</td></tr>
+        <tr><th scope="row">NOTBOT service fee</th><td>15%</td><td>0.00030589</td></tr>
+        <tr class="net"><th scope="row">Sent to your wallet</th><td>85%</td><td>0.00173339</td></tr>
+      </tbody>
+    </table>
+    <p class="fine">The fee is a separate transfer inside the same transaction you sign, so you can read it in your wallet's preview. You also pay the normal Solana network fee, a fraction of a cent.</p>
+  </section>
+
+  <section id="safety" class="section">
+    <h2>Safety</h2>
+    <div class="safety-grid">
+      <div>
+        <h3>Non-custodial</h3>
+        <p>NOTBOT is a static page. It builds a transaction in your browser and your wallet signs it. We never ask for a seed phrase or a private key, and we have no server that could receive one.</p>
+      </div>
+      <div>
+        <h3>Telegram trading bots</h3>
+        <p>Trading bots create many empty accounts. To reclaim from a bot wallet, export its key inside the bot, import it into Phantom, then open NOTBOT in Phantom's built-in browser. Once you have imported a bot key anywhere, treat that wallet as exposed and move your funds to a fresh wallet afterwards.</p>
+      </div>
+      <div>
+        <h3>Read before you sign</h3>
+        <p>A legitimate NOTBOT transaction only contains account-close instructions and one SOL transfer of 15% of the released rent to the fee wallet listed below. If you see anything else, reject it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <h2>Questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Will I lose any tokens?</summary>
+        <p>No. Only accounts with a balance of exactly zero are closed. Accounts holding tokens, or that are frozen, are skipped.</p>
+      </details>
+      <details>
+        <summary>Why do empty accounts exist at all?</summary>
+        <p>Solana requires a rent-exempt deposit to keep account data on chain. When you sell a token completely, the account stays open and the deposit stays locked until someone closes it.</p>
+      </details>
+      <details>
+        <summary>I have many accounts. Is it one transaction?</summary>
+        <p>Accounts are grouped into batches of 18 per transaction. You approve all batches at once when your wallet supports it, otherwise one after another.</p>
+      </details>
+      <details>
+        <summary>Do I need SOL in the wallet?</summary>
+        <p>Yes, a tiny amount to pay the network fee, around 0.00001 SOL per transaction.</p>
+      </details>
+      <details>
+        <summary>Can a closed account be recovered?</summary>
+        <p>Closing removes the empty account. If you buy that token again, a new account is created automatically.</p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <strong>Service fee wallet</strong>
+    <code id="feeWalletText">6rmpAs64hoFht7qCAL4kXvtHvDfnv9BfjbSmBPhQXqWh</code>
+  </div>
+  <p>NOTBOT is independent software and is not affiliated with Solana Foundation, Phantom, Solflare, Backpack or Helius. Use at your own risk and always review what your wallet asks you to sign.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.98.0/lib/index.iife.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
