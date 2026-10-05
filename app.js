@@ -6,10 +6,10 @@
    * ------------------------------------------------------------------ */
   const CONFIG = {
     RPC_URL: 'https://mainnet.helius-rpc.com/?api-key=3037fcc9-ac26-42ce-9d7e-df1cc859c183',
-    FEE_WALLET: '6rmpAs64hoFht7qCAL4kXvtHvDfnv9BfjbSmBPhQXqWh',
-    FEE_BPS: 1500,        // 15% service fee (basis points)
-    BATCH_SIZE: 18,       // close instructions per transaction
-    MAX_PER_ROUND: 300,   // accounts handled per "Reclaim" press
+    FEE_WALLET: 'DXEUU4vMCRAL6e71xS3v5AZPC8K4PQgb3A4mAGq1feE',
+    FEE_BPS: 100,         // 1% service fee (basis points)
+    BATCH_SIZE: 8,        // close instructions per transaction
+    MAX_PER_ROUND: 24,    // accounts handled per "Reclaim" press
   };
 
   const $ = (id) => document.getElementById(id);
@@ -377,7 +377,7 @@
     // 1) Close every empty account; the rent goes back to the owner
     for (const a of batch) tx.add(closeAccountIx(a.pubkey, owner, owner, a.programId));
 
-    // 2) Service fee: 15% of the rent released in this batch
+    // 2) Service fee: 1% of the rent released in this batch
     const fee = feeOf(sumLamports(batch));
     if (fee > 0) {
       tx.add(SystemProgram.transfer({ fromPubkey: owner, toPubkey: FEE_WALLET, lamports: fee }));
