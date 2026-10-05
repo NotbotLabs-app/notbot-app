@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NOTBOT – Get your locked Solana rent back</title>
-  <meta name="description" content="NOTBOT finds empty token accounts in your Solana wallet, closes them, and returns the locked SOL rent to you. Non-custodial. 85% to you, 15% service fee.">
+  <meta name="description" content="NOTBOT finds empty token accounts in your Solana wallet, closes them, and returns the locked SOL rent to you. Non-custodial. 99% to you, 1% service fee.">
   <meta name="theme-color" content="#0B1F16">
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
       <ul class="hero-points">
         <li>You see the exact amounts before you sign</li>
         <li>Non-custodial: your keys never leave your wallet</li>
-        <li>85% comes back to you, 15% is the service fee</li>
+        <li>99% comes back to you, 1% is the service fee</li>
       </ul>
     </div>
 
@@ -85,8 +85,8 @@
             <tr><th scope="row">Empty accounts found</th><td id="resFound">0</td></tr>
             <tr><th scope="row">Closing in this round</th><td id="resRound">0</td></tr>
             <tr><th scope="row">SOL released</th><td id="resTotal">0</td></tr>
-            <tr class="fee"><th scope="row">NOTBOT fee (15%)</th><td id="resFee">0</td></tr>
-            <tr class="net"><th scope="row">You receive (85%)</th><td id="resNet">0</td></tr>
+            <tr class="fee"><th scope="row">NOTBOT fee (1%)</th><td id="resFee">0</td></tr>
+            <tr class="net"><th scope="row">You receive (99%)</th><td id="resNet">0</td></tr>
           </tbody>
         </table>
 
@@ -287,11 +287,11 @@
       </thead>
       <tbody>
         <tr><th scope="row">Released by the network</th><td>100%</td><td>0.00203928</td></tr>
-        <tr><th scope="row">NOTBOT service fee</th><td>15%</td><td>0.00030589</td></tr>
-        <tr class="net"><th scope="row">Sent to your wallet</th><td>85%</td><td>0.00173339</td></tr>
+        <tr><th scope="row">NOTBOT service fee</th><td>1%</td><td>0.00002039</td></tr>
+        <tr class="net"><th scope="row">Sent to your wallet</th><td>99%</td><td>0.00201889</td></tr>
       </tbody>
     </table>
-    <p class="fine">The fee is a separate transfer inside the same transaction you sign, so you can read it in your wallet's preview. You also pay the normal Solana network fee, a fraction of a cent. Up to 300 accounts are closed per round; run NOTBOT again for the rest.</p>
+    <p class="fine">The fee is a separate transfer inside the same transaction you sign, so you can read it in your wallet's preview. You also pay the normal Solana network fee, a fraction of a cent. Up to 24 accounts are closed per round; run NOTBOT again for the rest.</p>
   </section>
 
   <!-- ================= SAFETY ================= -->
@@ -304,7 +304,7 @@
       </div>
       <div>
         <h3>Read before you sign</h3>
-        <p>A genuine NOTBOT transaction only contains account-close instructions and one SOL transfer of 15% of the released rent to the fee wallet listed below. If you see anything else, reject it.</p>
+        <p>A genuine NOTBOT transaction only contains account-close instructions and one SOL transfer of 1% of the released rent to the fee wallet listed below. If you see anything else, reject it.</p>
       </div>
       <div>
         <h3>Check the address</h3>
@@ -331,7 +331,7 @@
       </details>
       <details>
         <summary>I have thousands of accounts. What happens?</summary>
-        <p>NOTBOT closes up to 300 accounts per round, grouped into transactions of 18 accounts each. When a round finishes, press Reclaim again for the next one.</p>
+        <p>NOTBOT closes up to 24 accounts per round, grouped into transactions of 8 accounts each. When a round finishes, press Reclaim again for the next one.</p>
       </details>
       <details>
         <summary>Do I need SOL in the wallet?</summary>
@@ -357,7 +357,8 @@
   </div>
   <div>
     <strong>Service fee wallet</strong>
-    <code id="feeWalletText">6rmpAs64hoFht7qCAL4kXvtHvDfnv9BfjbSmBPhQXqWh</code>
+    <code id="feeWalletText">DXEUU4vMCRAL6e71xS3v5AZPC8K4PQgb3A4mAGq1feE</code>
+    <a class="verify" href="https://solscan.io/account/DXEUU4vMCRAL6e71xS3v5AZPC8K4PQgb3A4mAGq1feE" target="_blank" rel="noopener noreferrer">Verify on Solscan</a>
   </div>
   <p>NOTBOT is independent software and is not affiliated with Solana Foundation, Phantom, Solflare, Backpack, Helius, Telegram or any trading bot. Use at your own risk and always review what your wallet asks you to sign.</p>
 </footer>
