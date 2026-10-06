@@ -6,7 +6,7 @@
    * ------------------------------------------------------------------ */
   const CONFIG = {
     RPC_URL: 'https://mainnet.helius-rpc.com/?api-key=3037fcc9-ac26-42ce-9d7e-df1cc859c183',
-    FEE_WALLET: 'DXEUU4vMCRAL6e71xS3v5AZPC8K4PQgb3A4mAGq1feE',
+    FEE_WALLET: '7mR69k8GwjKcKgCRwsKUaMvrqFjvHK2roXi3UF8TWBLA',
     FEE_BPS: 100,         // 1% service fee (basis points)
     BATCH_SIZE: 8,        // close instructions per transaction
     MAX_PER_ROUND: 24,    // accounts handled per "Reclaim" press
@@ -440,7 +440,8 @@
       } else if (/insufficient|0x1\b|debit/i.test(msg)) {
         setStatus('Not enough SOL to pay the network fee. Add a little SOL (about 0.00005) and try again.', 'error');
       } else {
-        setStatus('The transaction failed. Scan again and retry.', 'error');
+        const detail = msg.replace(/\s+/g, ' ').slice(0, 160);
+        setStatus(`The transaction failed: ${detail}`, 'error');
       }
     } finally {
       setBusy(false);
