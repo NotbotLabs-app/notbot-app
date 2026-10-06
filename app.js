@@ -55,7 +55,9 @@
   const FEE_WALLET = new PublicKey(CONFIG.FEE_WALLET);
   const connection = new Connection(CONFIG.RPC_URL, 'confirmed');
 
-  const SITE_URL = location.origin + location.pathname;
+  // The official address. Used for "Copy link" and wallet deep links.
+  const SITE_URL = 'https://www.notbotapp.xyz/';
+  const SITE_ORIGIN = new URL(SITE_URL).origin;
   const IS_MOBILE = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   /* ------------------------------------------------------------------
@@ -128,7 +130,7 @@
 
   function deepLink(name) {
     const url = encodeURIComponent(SITE_URL);
-    const ref = encodeURIComponent(location.origin);
+    const ref = encodeURIComponent(SITE_ORIGIN);
     if (name === 'phantom') return `https://phantom.app/ul/browse/${url}?ref=${ref}`;
     if (name === 'solflare') return `https://solflare.com/ul/v1/browse/${url}?ref=${ref}`;
     return null;
